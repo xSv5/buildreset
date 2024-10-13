@@ -120,10 +120,13 @@ def load_config():
     try:
         with open("modules.json", "r") as f:
             config = json.load(f)
-            module = config.get("module", {})
+            #print("Loaded config:", config)  # Debugging line to show the content of the file
             
             # Ensure it's specifically the buildreset module
+            module = config.get("modules", {})
             if module.get("name") == "buildreset":
+                #print("Found buildreset module.")  # Debugging line
+                
                 activator_key_name = module['settings'][0]['activator_key']
                 activator_key = VK_CODES.get(activator_key_name, VK_CODES['q'])  # Default to 'Q' if not found
                 
